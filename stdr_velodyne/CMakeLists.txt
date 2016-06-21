@@ -44,8 +44,6 @@ add_library(${PROJECT_NAME}
 
   include/stdr_velodyne/message_filter.h
   src/message_filter.cpp
-  include/stdr_velodyne/transform.h
-  src/transform.cpp
 )
 target_link_libraries(${PROJECT_NAME} ${catkin_LIBRARIES} ${PCL_LIBRARIES})
 
@@ -62,15 +60,6 @@ target_link_libraries(conversion ${PROJECT_NAME})
 
 add_executable(pointcloud src/pointcloud/pointcloud_node.cpp)
 target_link_libraries(pointcloud ${PROJECT_NAME})
-
-add_executable(stdr_velodyne_aggregator_node src/aggregator_node.cpp)
-target_link_libraries(stdr_velodyne_aggregator_node ${PROJECT_NAME})
-set_target_properties(stdr_velodyne_aggregator_node
-                      PROPERTIES OUTPUT_NAME aggregator_node
-                      PREFIX "")
-
-# make sure configure headers are built before using them
-add_dependencies(stdr_velodyne_aggregator_node ${PROJECT_NAME}_gencfg)
 
 add_executable(fake_velodyne_pcd src/fake_velodyne_pcd.cpp)
 target_link_libraries(fake_velodyne_pcd ${PROJECT_NAME})
