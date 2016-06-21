@@ -66,7 +66,7 @@ namespace log_and_playback
  * This allows to conditionally work with LocalizePose messages, when not sure
  * whether they will be available.
  */
-class BagTFListener : public tf::TransformerHelper
+class BagTFListener : public tf::Transformer
 {
 public:
   BagTFListener() : broadcast_(false), from_localize_pose_(false), initialized_(false) {}

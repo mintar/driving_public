@@ -38,7 +38,6 @@
 #include <boost/program_options.hpp>
 
 #include <stdr_lib/exception.h>
-#include <stdr_velodyne/transform.h>
 
 #include <log_and_playback/data_reader.h>
 #include <log_and_playback/robot_model.h>
@@ -125,10 +124,8 @@ stdr_velodyne::PointCloudPtr SpinReader::processSpinQueue()
 
   try
   {
-    stdr_velodyne::PointCloud::Ptr velo_smooth(new stdr_velodyne::PointCloud);
-    stdr_velodyne::transform_scan(tf_listener_, target_frame, *spinQ_.front(), *velo_smooth);
+    res_spin = boost::make_shared<stdr_velodyne::PointCloud>(*spinQ_.front());
     spinQ_.pop();
-    res_spin = velo_smooth;
   }
   catch (tf::TransformException & e)
   {
